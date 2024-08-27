@@ -1,0 +1,10 @@
+# 商品审核模块
+opera_product_audit: "xpath==//*[contains(text(),'运营审核')]"
+opera_product_audit_menu: "xpath== //li[@class='ant-menu-item']"
+opera_product_audit_btn: "xpath== //span[@class='w-button-group-item']"
+opera_product_audit_adopt: "xpath== //button[@class='ant-btn ant-btn-primary']"
+opera_product_audit_list_detail: "xpath==// tr[@class='ant-table-row ant-table-row-level-0']/td"
+opera_product_audit_default: "xpath==// button[@class='ant-btn ant-btn-default']"
+opera_product_audit_danger: "xpath==// button[@class='ant-btn ant-btn-danger']"
+opera_product_audit_danger_remark: "id==remarks"
+opera_product_audit_danger_btn: "xpath==// button[@class='ant-btn ant-btn-primary']"

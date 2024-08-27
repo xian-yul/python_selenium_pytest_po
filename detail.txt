@@ -1,0 +1,31 @@
+24测试环境:
+卖家  http://192.168.101.24:8070/user/login
+买家  http://192.168.101.24:8090/shop/home
+运营  http://192.168.101.24:8050/dashboard
+金融  http://192.168.101.24:8055/finance/user/login?redirect=%2F
+
+新20:
+卖家 https://slrdm.jinsubao.cn/
+买家 https://demo.jinsubao.cn/
+运营 https://admdm.jinsubao.cn/
+金融 https://codm.jinsubao.cn
+
+线上:
+运营 https://adm.jinsubao.cn/
+卖家 https://seller.jinsubao.cn/
+买家 https://www.jinsubao.cn/shop/home
+
+
+24环境
+厦门市兴得铭贸易有限公司
+13500135000 主账号   13500135001   13500135002   13500135003
+
+
+福建金塑宝供应链
+18859228364 主账号 18859228360      18859228361
+
+厦门丹山岩韵茶业有限公司
+    17346709429  主账号     17346709428     17346709427   	13400134555/18929867679
+
+福建金塑宝科技有限公司
+19878532405 主账号    19878532406     19878532407

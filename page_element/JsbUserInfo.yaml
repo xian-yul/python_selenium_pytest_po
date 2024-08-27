@@ -1,0 +1,33 @@
+# seller
+seller_login_phone: "id==phone"
+seller_login_code_text: "id==verifyCode"
+seller_login_code_btn: "xpath==// button[@class='getCaptcha ant-btn']"
+seller_login_submit: "xpath==// button[@class='login-button ant-btn ant-btn-primary ant-btn-lg']"
+seller_switch_login: "xpath==// div[@class='ant-tabs-tab']"
+seller_login_name: "id==username"
+seller_login_password: "id==password"
+seller_login_code_pop: "xpath==// span[@class='ant-notification-close-x']"
+
+
+
+
+
+
+# user
+user_login_text: "link_text==登录"
+user_login_phone: "id==phone"
+user_login_code_text: "id==verifyCode"
+user_login_code_btn: "xpath==// button[@class='ant-btn ant-btn-link ant-btn-sm']"
+user_login_submit: "xpath==// button[@class='ant-btn ant-btn-primary ant-btn-lg ant-btn-block']"
+
+
+
+
+
+
+# opera
+opera_login_phone: "id==phone"
+opera_login_code_text: "id==code"
+opera_login_code_btn: "xpath==// button[@class='getCaptcha ant-btn']"
+opera_login_submit: "xpath==// button[@class='login-button ant-btn ant-btn-primary ant-btn-lg']"
+
