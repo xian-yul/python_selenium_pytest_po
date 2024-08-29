@@ -3,12 +3,10 @@ import time
 from selenium.common.exceptions import NoSuchElementException
 
 from page.webpage import WebPage
-from selenium.webdriver.common.keys import Keys
 
 from common.readelement import Element
-from utils import util, times
+from utils import times
 from utils.log import Log
-from utils.times import sleep
 
 log = Log()
 opera = Element('JsbOperaProductAudit')

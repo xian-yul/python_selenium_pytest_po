@@ -19,8 +19,8 @@ class TestOperaInspect:
     @allure.title('卖家添加原料流程')
     def test_seller_good_add(self, drivers):
         log.info('当前执行   添加原料    ')
-        server = '20'
-        seller_phone = '17200000005'
+        server = '24'
+        seller_phone = '17200000002'
         seller = JsbSellerGoodAdd(drivers)
         code = 666666
         raw_name = ''
@@ -35,7 +35,7 @@ class TestOperaInspect:
         basis_min_purchase = '0.01'
         delivery_spill_price = 50
         self_mention_spill_price = 30
-        handsel_rate = 20
+        handles_rate = 20
         min_protection_price = 0
         max_protection_price = 0
         login_type = 0
@@ -50,27 +50,28 @@ class TestOperaInspect:
             seller.seller_goods_detail(img_path, profiles, detail)
             if add_type == 3:
                 seller.seller_goods_stock_info(raw_stock, raw_min_purchase, raw_delivery_price, raw_self_mention_price)
-                seller.seller_basis_info(basis_stock, basis_min_purchase, handsel_rate, min_protection_price,
+                seller.seller_basis_info(basis_stock, basis_min_purchase, handles_rate,
+                                         min_protection_price,
                                          max_protection_price,
                                          delivery_spill_price,
                                          self_mention_spill_price, raw_number, img_path)
             elif add_type == 1:
                 seller.seller_goods_stock_info(raw_stock, raw_min_purchase, raw_delivery_price, raw_self_mention_price)
             else:
-                seller.seller_basis_info(basis_stock, basis_min_purchase, handsel_rate, min_protection_price,
+                seller.seller_basis_info(basis_stock, basis_min_purchase, handles_rate,
+                                         min_protection_price,
                                          max_protection_price,
                                          delivery_spill_price,
                                          self_mention_spill_price, raw_number, img_path)
+            log.info("值为：" + str(raw_number))
             raw_number = seller.seller_goods_add_submit(server, raw_number, img_path)
-            log.info(str(num))
             num += 1
-        log.info('添加完毕 条数:{}'.format(str(num)))
-        log.info("开始时间: " + current_time)
-        now_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        log.info("结束时间: " + now_time)
-        lead_time = time_lag(now_time, current_time)
-        log.info("共计使用时间: " + str(lead_time))
+            log.info('添加完毕 条数:{}'.format(str(num)))
+            log.info("开始时间: " + current_time)
+            now_time = time.strftime('%Y-%m-%d %H:%M:%S')
+            log.info("结束时间: " + now_time)
+            lead_time = time_lag(now_time, current_time)
+            log.info("共计使用时间: " + str(lead_time))
 
-
-if __name__ == '__main__':
-    pytest.main(['TestCase/test_seller_good_add.py'])
+            if __name__ == '__main__':
+                pytest.main(['TestCase/test_seller_good_add.py'])

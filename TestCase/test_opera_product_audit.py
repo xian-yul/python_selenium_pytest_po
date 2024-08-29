@@ -19,7 +19,7 @@ class TestOperaProductAudit:
     @allure.title('商品审核')
     def test_seller_good_add(self, drivers):
         log.info('当前执行   商品审核    ')
-        server = '20'
+        server = '24'
         opera_phone = '13600136003'
         opera = JsbOperaProductAudit(drivers)
         code = 666666

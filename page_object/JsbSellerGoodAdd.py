@@ -1,3 +1,4 @@
+import sys
 import time
 
 from selenium.common.exceptions import NoSuchElementException
@@ -44,6 +45,7 @@ class JsbSellerGoodAdd(WebPage):
     # 点击智能搜索进入选择原料 并可进行搜索
     def seller_raw_number(self, raw_name, raw_number):
         times.sleep(0.5)
+        log.info('当前选择牌号下标为：{}'.format(str(raw_number)))
         # 原料数据首次进入未进行加载时 默认能取到60条数据
         self.is_click(seller['product_search_btn'])
         if raw_name != '':
@@ -51,10 +53,14 @@ class JsbSellerGoodAdd(WebPage):
             self.is_click(seller['product_search_submit'])
         raw = self.find_elements(seller['product_raw'])
         log.info('当前取到牌号数据数量{}'.format(str(len(raw))))
-        if raw_number > len(raw):
+        grade_num = 0
+        if raw_number >= len(raw):
             log.info('当前所要选择牌号下标位置大于已取到牌号数据 因此下拉加载刷新')
-            self.script_top(raw[-1])
-            raw = self.find_elements(seller['product_raw'])
+            while grade_num < 5:  # < x 为循环次数 加载原料选择
+                raw = self.find_elements(seller['product_raw'])
+                sleep()
+                self.script_top(raw[-1])
+                grade_num += 1
             log.info('下拉加载牌号数据 重新取到的牌号数据数量为:{}'.format(str(len(raw))))
         raw[raw_number].click()
         log.info('所选择原料为:{}'.format(raw[raw_number].text))
@@ -94,7 +100,7 @@ class JsbSellerGoodAdd(WebPage):
         self.input_clear_text(seller['product_goods_selfMentionPrice'], self_mention_price)
 
     # 填写基差信息
-    def seller_basis_info(self, stock, min_purchase, handsel_rate, min_protection_price, max_protection_price,
+    def seller_basis_info(self, stock, min_purchase, handles_rate, min_protection_price, max_protection_price,
                           delivery_spill_price,
                           self_mention_spill_price, raw_number, img_path):
         time.sleep(0.5)
@@ -113,18 +119,21 @@ class JsbSellerGoodAdd(WebPage):
             time.sleep(1)
             self.find_elements(seller['product_next_step'])[2].click()
         except Exception:
-            log.info('-----------------------------------------------------------------------')
+            log.info('所选牌号有基差合约 进行填写基差信息')
             self.is_click(seller['product_basis_tab'])
             purchase_num = self.find_elements(seller['product_basis_num'])[2].text
             surplus = util.remove_chinese(str(purchase_num))
             basis_surplus = surplus[1:]  # 剩余可发布基差量
             if float(stock) > float(basis_surplus):
                 stock = 0.01
+            elif float(basis_surplus) == 0:
+                log.info('无剩余基差交易量可发布')
+                sys.exit(0)
             self.input_clear_text(seller['product_basis_stock'], stock)
             self.input_clear_text(seller['product_basis_minPurchase'], min_purchase)
             self.find_elements(seller['product_basis_transaction_type'])[5].click()  # 4收盘可交易 5收盘不可交易 默认4
             self.find_elements(seller['product_basis_contract_type'])[7].click()  # 6失效下架 7失效切换 8自动切换 默认6
-            self.input_clear_text(seller['product_basis_handselRate'], handsel_rate)
+            self.input_clear_text(seller['product_basis_handlesRate'], handles_rate)
             contract_price = self.find_elements(seller['product_contract_price'])[1].text
             min_protection_price = int(contract_price) - 100
             max_protection_price = int(contract_price) + 300
@@ -144,7 +153,7 @@ class JsbSellerGoodAdd(WebPage):
             else:
                 assert self.return_current_url() == page_url['20_raw_list']
         except AssertionError:
-            log.error('添加出错 重新选择牌号')
+            log.error('添加出错 或 重复添加  重新选择牌号')
             raw_number += 10
             self.find_elements(seller['product_previous_step'])[2].click()  # 返回上一页界面 重新选择原料
             self.seller_raw_number('', raw_number)
@@ -156,7 +165,7 @@ class JsbSellerGoodAdd(WebPage):
             time.sleep(1)
             self.find_elements(seller['product_next_step'])[2].click()
             self.seller_goods_add_submit(server, raw_number, img_path)
-        log.info('添加成功')
         raw_number += 1
         times.sleep()
+        log.info('----------------------------------------------------------------------------------')
         return raw_number
