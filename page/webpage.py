@@ -177,9 +177,9 @@ class WebPage(object):
         self.driver.execute_script(js)
 
     # 隐式等待 超时时间、轮询时间、等待条件 指定元素
-    def WebDriverWait_Time_log(self, driver, over_time, polling_time, location, position):
+    def WebDriverWait_Time_log(self, driver, over_time, polling_time, location):
         WebDriverWait(driver, over_time, polling_time).until(
-            expected_conditions.element_to_be_clickable(location, position))
+            expected_conditions.element_to_be_clickable(location))
 
     # 隐式等待 超时时间、轮询时间、等待条件 指定标题
     def WebDriverWait_Time_title(self, driver, over_time, polling_time, title):
